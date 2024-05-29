@@ -16,7 +16,7 @@ def make_image(message, file_name):
 
     lines = message.split('\n')
 
-    x_text = 200
+    x_text = 50
     y_text = 600
 
     for line in lines:

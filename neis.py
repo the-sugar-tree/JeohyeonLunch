@@ -2,20 +2,21 @@ import requests
 import json
 from datetime import datetime
 
-key = "KEY HERE"
+SCHOOL_TYPE = "J10"
+SCHOOL_CODE = 7530980
 
-url = "https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=" + key + "&Type=json&pIndex=1&pSize=1&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530980&MLSV_FROM_YMD=" + datetime.today().strftime("%Y%m%d")
 
-response = requests.get(url)
+def get_meal_info(key, date=datetime.today().strftime("%Y%m%d")):
+    url = (f"https://open.neis.go.kr/hub/mealServiceDietInfo?KEY={key}"
+           f"&Type=json&pIndex=1&pSize=1&ATPT_OFCDC_SC_CODE={SCHOOL_TYPE}&SD_SCHUL_CODE={SCHOOL_CODE}&MLSV_FROM_YMD={date}")
 
-code = response.status_code
-value = response.text
+    response = requests.get(url)
 
-##print("response code: " + str(code))
-print(value)
+    code = response.status_code
+    value = response.text
 
-json_obj = json.loads(value)
+    print(value)
 
-##print(json_obj['mealServiceDietInfo'][0]['head'][1]['RESULT']['CODE'])
+    json_obj = json.loads(value)
 
-print(json_obj['mealServiceDietInfo'][1]['row'][0]['DDISH_NM'].replace("<br/>", "\n"))
+    return json_obj['mealServiceDietInfo'][1]['row'][0]['DDISH_NM'].replace("<br/>", "\n")
