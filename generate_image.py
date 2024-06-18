@@ -8,7 +8,7 @@ def make_image(message, file_name):
     H = 1920
     bg_color = 'rgb(214, 230, 245)'
 
-    font = ImageFont.truetype('fonts/NanumGothic.ttf', size=80)
+    font = ImageFont.truetype('fonts/NanumGothic.ttf', size=60)
     font_color = 'rgb(0, 0, 0)'
 
     image = Image.new('RGB', (W, H), color=bg_color)
